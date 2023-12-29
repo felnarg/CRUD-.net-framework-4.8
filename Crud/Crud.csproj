@@ -167,6 +167,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202312282113394_InitialMigration.cs" />
+    <Compile Include="Migrations\202312282113394_InitialMigration.designer.cs">
+      <DependentUpon>202312282113394_InitialMigration.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -315,6 +320,15 @@
       <Project>{ac8c6a9b-7870-4811-b856-fab01b8ced5f}</Project>
       <Name>Application</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Infrastructure\Infrastructure.csproj">
+      <Project>{f5ccd930-99ea-45b6-9f02-cd4c9e7aa3c2}</Project>
+      <Name>Infrastructure</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202312282113394_InitialMigration.resx">
+      <DependentUpon>202312282113394_InitialMigration.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
