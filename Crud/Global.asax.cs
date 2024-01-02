@@ -1,11 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.Configuration;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Infrastructure;
+using Unity;
+using Unity.Injection;
+using Unity.Lifetime;
 
 namespace Crud
 {
@@ -18,6 +19,24 @@ namespace Crud
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+        }
+
+        public static class UnityConfig
+        {
+            public static void Register(HttpConfiguration config)
+            {
+                var container = new UnityContainer();
+
+                var connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+
+                // Registra el contexto de la base de datos y pasa la cadena de conexión
+                container.RegisterType<CreditCardDbContext>(new HierarchicalLifetimeManager(), new InjectionConstructor(connectionString));
+
+                // Configuración de IoC
+                //container.RegisterType<IRepository<>, Repository<>>();
+
+                config.DependencyResolver = new UnityResolver(container);
+            }
         }
     }
 }
