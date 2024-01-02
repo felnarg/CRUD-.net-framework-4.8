@@ -3,6 +3,9 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Application.Interfaces;
+using Application.Querys;
+using Domain.Models;
 using Infrastructure;
 using Unity;
 using Unity.Injection;
@@ -31,6 +34,8 @@ namespace Crud
 
                 // Registra el contexto de la base de datos y pasa la cadena de conexión
                 container.RegisterType<CreditCardDbContext>(new HierarchicalLifetimeManager(), new InjectionConstructor(connectionString));
+                container.RegisterType<IRepository<CreditCard>, Repository<CreditCard>>(new HierarchicalLifetimeManager());
+                container.RegisterType<ICreditCardServices, CreditCardServices>(new HierarchicalLifetimeManager());
 
                 // Configuración de IoC
                 //container.RegisterType<IRepository<>, Repository<>>();
