@@ -7,7 +7,7 @@ namespace Infrastructure
     {
         public DbSet<CreditCard> CreditCards { get; set; }
 
-        public CreditCardDbContext(string connectionString) : base(connectionString) { }
+        public CreditCardDbContext() : base("name=DefaultConnection") { }
 
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)

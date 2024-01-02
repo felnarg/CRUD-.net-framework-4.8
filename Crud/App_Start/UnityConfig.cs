@@ -1,6 +1,13 @@
 using System;
-
+using System.Configuration;
+using System.Web.Mvc;
+using Application.Interfaces;
+using Application.Querys;
+using Domain.Models;
+using Infrastructure;
 using Unity;
+using Unity.Injection;
+using Unity.Lifetime;
 
 namespace Crud
 {
@@ -43,5 +50,23 @@ namespace Crud
             // TODO: Register your type's mappings here.
             // container.RegisterType<IProductRepository, ProductRepository>();
         }
+
+        public static void Register()
+        {
+            UnityContainer container = new UnityContainer();
+
+            //string connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
+
+            // Registra el contexto de la base de datos y pasa la cadena de conexión
+            //container.RegisterType<CreditCardDbContext>(new HierarchicalLifetimeManager(), new InjectionConstructor(connectionString));
+            container.RegisterType<IRepository<CreditCard>, Repository<CreditCard>>();
+            container.RegisterType<ICreditCardServices, CreditCardServices>();
+
+            // Configuración de IoC
+            //container.RegisterType<IRepository<>, Repository<>>();
+
+            DependencyResolver.SetResolver(new UnityResolver(container));
+        }
+        
     }
 }
