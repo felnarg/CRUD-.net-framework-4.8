@@ -10,7 +10,7 @@ using RouteAttribute = System.Web.Http.RouteAttribute;
 
 namespace Crud.Controllers
 {
-    [Route("[controller]")]
+    //[Route("[controller]")]
     public class CreditCardController : Controller
     {
         private readonly ICreditCardServices _creditCardServices;

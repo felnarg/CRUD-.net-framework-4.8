@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Http;
+﻿using System.Web.Http;
+using Newtonsoft.Json.Serialization;
 
 namespace Crud
 {
@@ -12,6 +10,7 @@ namespace Crud
             // Configuración y servicios de Web API
 
             // Rutas de Web API
+            config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
