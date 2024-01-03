@@ -233,13 +233,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202312282113394_InitialMigration.cs" />
-    <Compile Include="Migrations\202312282113394_InitialMigration.designer.cs">
-      <DependentUpon>202312282113394_InitialMigration.cs</DependentUpon>
+    <Compile Include="Migrations\202401031707228_InitialMigration.cs" />
+    <Compile Include="Migrations\202401031707228_InitialMigration.designer.cs">
+      <DependentUpon>202401031707228_InitialMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UnityResolver.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\HelpPage\HelpPage.css" />
@@ -397,8 +396,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202312282113394_InitialMigration.resx">
-      <DependentUpon>202312282113394_InitialMigration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202401031707228_InitialMigration.resx">
+      <DependentUpon>202401031707228_InitialMigration.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

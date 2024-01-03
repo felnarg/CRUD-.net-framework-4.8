@@ -1,57 +1,60 @@
 ﻿using System;
-using System.Web.Mvc;
-using Application.Querys;
-using Domain.Models;
-using Application.Interfaces;
 using System.Web.Http;
-using HttpPostAttribute = System.Web.Http.HttpPostAttribute;
+using System.Web.Mvc;
+using Application.Interfaces;
+using Domain.Models;
 using HttpGetAttribute = System.Web.Http.HttpGetAttribute;
-using RouteAttribute = System.Web.Http.RouteAttribute;
+using HttpPostAttribute = System.Web.Http.HttpPostAttribute;
 
 namespace Crud.Controllers
 {
-    //[Route("[controller]")]
-    public class CreditCardController : Controller
+    //[Route("[api/controller]")]
+    public class CreditCardController : ApiController
     {
         private readonly ICreditCardServices _creditCardServices;
-        public CreditCardController(CreditCardServices creditCardServices)
+        public CreditCardController(ICreditCardServices creditCardServices)
         {
             _creditCardServices = creditCardServices;
         }
 
         [HttpGet]
-        public ActionResult GetAll()
+        [System.Web.Http.Route("api/creditcard/getall")]
+        public IHttpActionResult GetAll()
         {
             _creditCardServices.GetAll();
-            return Json(new { mensaje = "Operación exitosa" }, JsonRequestBehavior.AllowGet);
+            return Json(new { mensaje = "Operación exitosa" });
         }
 
         [HttpGet]
-        public ActionResult GetById(Guid id)
+        [System.Web.Http.Route("api/creditcard/getbyid")]
+        public IHttpActionResult GetById(Guid id)
         {
             _creditCardServices.GetById(id);
-            return Json(new { mensaje = "Operación exitosa" }, JsonRequestBehavior.AllowGet);
+            return Json(new { mensaje = "Operación exitosa" });
         }
 
         [HttpPost]
-        public ActionResult Save([FromBody] CreditCard entity)
+        [System.Web.Http.Route("api/creditcard/save")]
+        public IHttpActionResult Save([FromBody] CreditCard entity)
         {
             _creditCardServices.SaveEntity(entity);
-            return Json(new { mensaje = "Operación exitosa" }, JsonRequestBehavior.AllowGet);
+            return Json(new { mensaje = "Operación exitosa" });
         }
 
         [HttpPost]
-        public ActionResult Update(CreditCard creditCard)
+        [System.Web.Http.Route("api/creditcard/update")]
+        public IHttpActionResult Update(CreditCard creditCard)
         {
             _creditCardServices.Update(creditCard);
-            return Json(new { mensaje = "Operación exitosa" }, JsonRequestBehavior.AllowGet);
+            return Json(new { mensaje = "Operación exitosa" });
         }
         
-        [HttpPost]        
-        public ActionResult Delete(Guid id)
+        [HttpPost]
+        [System.Web.Http.Route("api/creditcard/delete")]
+        public IHttpActionResult Delete(Guid id)
         {
             _creditCardServices.Delete(id);
-            return Json(new { mensaje = "Operación exitosa" }, JsonRequestBehavior.AllowGet);
+            return Json(new { mensaje = "Operación exitosa" });
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Infrastructure
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<CreditCard>().HasKey(c => c.CardNumber);
+            modelBuilder.Entity<CreditCard>().HasKey(c => c.Id);
 
             // Configuración de la longitud máxima del número de tarjeta
             modelBuilder.Entity<CreditCard>().Property(c => c.CardNumber)

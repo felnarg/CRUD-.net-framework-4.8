@@ -10,7 +10,7 @@ namespace Crud
             // Configuración y servicios de Web API
 
             // Rutas de Web API
-            config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
+            //config.Formatters.JsonFormatter.SerializerSettings.ContractResolver = new CamelCasePropertyNamesContractResolver();
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(

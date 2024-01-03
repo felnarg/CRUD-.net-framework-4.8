@@ -17,9 +17,10 @@ namespace Crud
     {
         protected void Application_Start()
         {
+            ControllerBuilder.Current.SetControllerFactory(new DefaultControllerFactory());
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
-            UnityConfig.Register();
+            UnityConfig.RegisterDependencies();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);  

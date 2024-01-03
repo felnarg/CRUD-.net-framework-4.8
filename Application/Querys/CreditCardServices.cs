@@ -29,7 +29,7 @@ namespace Application.Querys
 
         public void SaveEntity(CreditCard entity)
         {
-            _creditCardRepository.SaveEntity(entity);
+            _creditCardRepository.SaveEntityAsync(entity);
         }
 
         public void Update(CreditCard entity)

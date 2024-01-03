@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
+using System.Threading.Tasks;
 using Application.Interfaces;
 
 namespace Infrastructure
@@ -33,10 +34,10 @@ namespace Infrastructure
             return entity ?? throw new Exception("Not Found");
         }
 
-        public void SaveEntity(T entity)
+        public async Task SaveEntityAsync(T entity)
         {
             _context.Set<T>().Add(entity); 
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
         public void Update(T entity)
