@@ -1,9 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using System.Xml.Linq;
 
 namespace Application.Interfaces
 {
@@ -11,7 +8,7 @@ namespace Application.Interfaces
     {
         IEnumerable<T> GetAll();
         T GetById(Guid id);
-        void SaveEntity(T entity);
+        Task SaveEntityAsync(T entity);
         void Update(T entity);
         void Delete(Guid id);
     }

@@ -1,18 +1,13 @@
 ﻿using System;
-using System.CodeDom;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Application.Interfaces;
-using Domain.Models;
-using NPOI.OpenXmlFormats.Spreadsheet;
-using NPOI.SS.Formula.Functions;
 
 namespace Infrastructure
 {
-    public class Repository : IRepository<T> 
+    public class Repository<T> : IRepository<T> where T : class
     {
         private readonly CreditCardDbContext _context;
 
@@ -23,7 +18,7 @@ namespace Infrastructure
 
         public void Delete(Guid id)
         {
-            T entity = _context.Set<T>().Find(id) ?? throw new Exception("No se encontró el Id especificado");
+            T entity = _context.Set<T>().Find(id) ?? throw new Exception("Not Found");
             _context.Set<T>().Remove(entity);
             _context.SaveChanges();
         }
@@ -36,13 +31,13 @@ namespace Infrastructure
         public T GetById(Guid id)
         {
             T entity = _context.Set<T>().Find(id);
-            return entity ?? throw new Exception("No se encontró el Id especificado");
+            return entity ?? throw new Exception("Not Found");
         }
 
-        public void SaveEntity(T entity)
+        public async Task SaveEntityAsync(T entity)
         {
             _context.Set<T>().Add(entity); 
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
         public void Update(T entity)
@@ -53,7 +48,7 @@ namespace Infrastructure
                 _context.SaveChanges();
             }
             else            
-                throw new Exception("No se encontró el Id especificado");
+                throw new Exception("Not Found");
             
         }
     }

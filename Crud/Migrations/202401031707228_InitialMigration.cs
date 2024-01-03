@@ -11,12 +11,12 @@
                 "dbo.CreditCards",
                 c => new
                     {
+                        Id = c.Guid(nullable: false),
                         CardNumber = c.String(nullable: false, maxLength: 16),
-                        Id = c.Int(nullable: false),
                         Holder = c.String(nullable: false),
                         Balance = c.Decimal(nullable: false, precision: 18, scale: 2),
                     })
-                .PrimaryKey(t => t.CardNumber);
+                .PrimaryKey(t => t.Id);
             
         }
         

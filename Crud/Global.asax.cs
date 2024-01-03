@@ -3,6 +3,9 @@ using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Application.Interfaces;
+using Application.Querys;
+using Domain.Models;
 using Infrastructure;
 using Unity;
 using Unity.Injection;
@@ -14,29 +17,13 @@ namespace Crud
     {
         protected void Application_Start()
         {
+            ControllerBuilder.Current.SetControllerFactory(new DefaultControllerFactory());
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
+            UnityConfig.RegisterDependencies();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-            BundleConfig.RegisterBundles(BundleTable.Bundles);
-        }
-
-        public static class UnityConfig
-        {
-            public static void Register(HttpConfiguration config)
-            {
-                var container = new UnityContainer();
-
-                var connectionString = ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString;
-
-                // Registra el contexto de la base de datos y pasa la cadena de conexión
-                container.RegisterType<CreditCardDbContext>(new HierarchicalLifetimeManager(), new InjectionConstructor(connectionString));
-
-                // Configuración de IoC
-                //container.RegisterType<IRepository<>, Repository<>>();
-
-                config.DependencyResolver = new UnityResolver(container);
-            }
-        }
+            BundleConfig.RegisterBundles(BundleTable.Bundles);  
+        }        
     }
 }

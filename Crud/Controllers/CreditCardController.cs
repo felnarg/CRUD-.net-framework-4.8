@@ -1,49 +1,58 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Http;
-using System.Web.Http.Results;
 using System.Web.Mvc;
+using Application.Interfaces;
 using Domain.Models;
+using HttpGetAttribute = System.Web.Http.HttpGetAttribute;
+using HttpPostAttribute = System.Web.Http.HttpPostAttribute;
 
 namespace Crud.Controllers
 {
-    public class CreditCardController : Controller
+    //[Route("[api/controller]")]
+    public class CreditCardController : ApiController
     {
-        // GET: CreditCard
-        public ActionResult GetAll()
+        private readonly ICreditCardServices _creditCardServices;
+        public CreditCardController(ICreditCardServices creditCardServices)
         {
-
-            return Ok();
+            _creditCardServices = creditCardServices;
         }
 
-        // GET: CreditCard/Details/5
-        public ActionResult GetById(Guid id)
+        [HttpGet]
+        [System.Web.Http.Route("api/creditcard/getall")]
+        public IHttpActionResult GetAll()
         {
-            return View();
+            return Ok(_creditCardServices.GetAll());
         }
 
-        // GET: CreditCard/Create
-        public ActionResult Save()
-        {
-            return View();
+        [HttpGet]
+        [System.Web.Http.Route("api/creditcard/getbyid/{id}")]
+        public IHttpActionResult GetById([FromUri] Guid id)
+        {            
+            return Ok(_creditCardServices.GetById(id));
         }
 
-        // POST: CreditCard/Create
-
-
-        // GET: CreditCard/Edit/5
-        public ActionResult Update(CreditCard creditCard)
+        [HttpPost]
+        [System.Web.Http.Route("api/creditcard/save")]
+        public IHttpActionResult Save([FromBody] CreditCard entity)
         {
-            return View();
+            _creditCardServices.SaveEntity(entity);
+            return Json(new { mensaje = "Operación exitosa" });
         }
 
-        // POST: CreditCard/Edit/5
-        [HttpPost]        
-        public ActionResult Delete(int id)
+        [HttpPost]
+        [System.Web.Http.Route("api/creditcard/update")]
+        public IHttpActionResult Update([FromBody] CreditCard creditCard)
         {
-            return View();
+            _creditCardServices.Update(creditCard);
+            return Json(new { mensaje = "Operación exitosa" });
+        }
+        
+        [HttpPost]
+        [System.Web.Http.Route("api/creditcard/delete/{id}")]
+        public IHttpActionResult Delete([FromUri] Guid id)
+        {
+            _creditCardServices.Delete(id);
+            return Json(new { mensaje = "Operación exitosa" });
         }
     }
 }
